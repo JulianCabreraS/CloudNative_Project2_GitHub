@@ -1,0 +1,4 @@
+I decided to split the web services into two microservices. A microservice working for persons and connection and a microservice for Locations. 
+This is because there is a dependence on persons and connections. The location could be separated without much trouble.
+A Kafka message is created every time that we post against persons. This will be used for future connections with other systems. 
+Location microservice has two entry points, one through REST and another against GRPC. Depending on how much information we send to GRPC, we can choose between REST or GRPC.

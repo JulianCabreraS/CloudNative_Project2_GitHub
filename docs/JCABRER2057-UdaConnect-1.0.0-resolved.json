@@ -1,0 +1,212 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Simple Inventory API",
+    "description": "This is a simple API",
+    "contact": {
+      "email": "you@your-company.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/JCABRER2057/UdaConnect/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    }
+  ],
+  "paths": {
+    "/locations": {
+      "get": {
+        "summary": "display locations",
+        "description": "By passing in the appropriate options, you can search for locations\n",
+        "operationId": "Display information of a location",
+        "parameters": [
+          {
+            "name": "location_id",
+            "in": "query",
+            "description": "pass an specific location",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Location"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      },
+      "post": {
+        "summary": "adds a location",
+        "description": "Adds an item to the system",
+        "operationId": "locationResource",
+        "requestBody": {
+          "description": "Location to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Location"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Location created"
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          }
+        }
+      }
+    },
+    "/persons": {
+      "get": {
+        "summary": "Display persons",
+        "description": "By passing in the appropriate options, you can search for persons\n",
+        "operationId": "Display information of a person",
+        "parameters": [
+          {
+            "name": "person_id",
+            "in": "query",
+            "description": "pass an specific person_id",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Person"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      },
+      "post": {
+        "summary": "Adds a person",
+        "requestBody": {
+          "description": "Person to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Person"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Person created"
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Location": {
+        "required": [
+          "creation_time",
+          "id",
+          "latitud",
+          "longitude",
+          "person_id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1
+          },
+          "person_id": {
+            "type": "integer",
+            "example": 1
+          },
+          "longitude": {
+            "type": "string",
+            "example": "-106.5721846"
+          },
+          "latitude": {
+            "type": "string",
+            "example": "35.058564"
+          },
+          "creation_time": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Person": {
+        "required": [
+          "company_name",
+          "first_name",
+          "id",
+          "last_name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 5
+          },
+          "first_name": {
+            "type": "string",
+            "example": "Taco"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Fargo"
+          },
+          "company_name": {
+            "type": "string",
+            "example": "Alpha Omega Upholstery"
+          }
+        }
+      }
+    }
+  }
+}
